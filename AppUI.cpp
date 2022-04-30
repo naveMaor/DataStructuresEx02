@@ -6,12 +6,12 @@
 
 void AppUI::GetInput() {
     string tmp,name;
-    int id;
+    int id,index=0;
     getline (std::cin,tmp);
     n = stoi(tmp);
     if(n<0){
         //todo:add exception
-        cout << "invalid input" << endl;
+        cout << "invalid input - 1" << endl;
         exit(1);
     }
     Person* newPersonArr = new Person[n];
@@ -22,9 +22,10 @@ void AppUI::GetInput() {
         id = stoi(tmp);
         getline(ss,name);
         for (int j = 0; j < index; ++j) {
-            if(newPersonArr[index].getId() == id || newPersonArr[index].getName() == name ){
+            int compareID =newPersonArr[j].getId();
+            if(compareID == id){// || newPersonArr[index].getName() == name ){
                 //todo:add exception
-                cout << "invalid input" << endl;
+                cout << "invalid input - 2" << endl;
                 exit(1);
             }
         }
@@ -37,7 +38,7 @@ void AppUI::GetInput() {
     k = stoi(tmp);
     if(k<1 || k >n){
         //todo:add exception
-        cout << "invalid input" << endl;
+        cout << "invalid input - 3" << endl;
         exit(1);
     }
 
@@ -52,6 +53,20 @@ void AppUI::Print() {
 }
 
 void AppUI::Run() {
+    int numberOfComp = 0;
+
     GetInput();
-    Print();
+    //Print();
+    Func* funcs[2];
+    funcs[0] = new RandSelection();
+    funcs[1] = new selectHeap();
+    cout << "\n \n result: "<< endl;
+    numberOfComp = 0;
+    Person p1;
+    for (int i = 0; i < 1; ++i) {
+        cout << funcs[i]->GetName() << endl;
+        numberOfComp = 0;
+        p1 = funcs[i]->RunFunc(personArr,n,k,numberOfComp);
+        cout << "id: " << p1.getId() << " name: " << p1.getName() << " numberOfComp: " << numberOfComp << endl;
+    }
 }

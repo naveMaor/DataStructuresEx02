@@ -10,6 +10,7 @@
 using namespace std;
 
 class Func {
+public:
     virtual string GetName() = 0;
     virtual const Person& RunFunc(Person [] ,int n, int k, int &NumComp) = 0;
 };

@@ -10,7 +10,10 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-using namespace std;
+#include "Func.h"
+#include "RandSelection.h"
+#include "selectHeap.h"
+
 
 using namespace std;
 

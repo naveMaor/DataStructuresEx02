@@ -9,6 +9,6 @@ int main() {
     AppUI appp;
     appp.Run();
 
-    std::cout << "Hello, World!" << std::endl;
+    //std::cout << "Hello, World!" << std::endl;
     return 0;
 }
