@@ -69,16 +69,15 @@ MinHeap::~MinHeap()
 
 void MinHeap::FixHeap(int node,int &NumComp)
 {
-    NumComp= NumComp+2;
     int min;
     int left = Left(node);
     int right = Right(node);
-
+    NumComp= NumComp+2;
     if((left < heapSize) && (data[left].getPriority() < data[node].getPriority()))
         min = left;
     else
         min = node;
-
+    NumComp= NumComp+2;
     if (( right < heapSize) && (data[right].getPriority() < data[min].getPriority()))
         min = right;
 

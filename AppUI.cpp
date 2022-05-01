@@ -61,12 +61,11 @@ void AppUI::Run() {
     funcs[0] = new RandSelection();
     funcs[1] = new selectHeap();
     cout << "\n \n result: "<< endl;
-    numberOfComp = 0;
     Person p1;
-    for (int i = 0; i < 1; ++i) {
-        cout << funcs[i]->GetName() << endl;
+    for (int i = 0; i < 2; ++i) {
+        cout << funcs[i]->GetName() ;
         numberOfComp = 0;
         p1 = funcs[i]->RunFunc(personArr,n,k,numberOfComp);
-        cout << "id: " << p1.getId() << " name: " << p1.getName() << " numberOfComp: " << numberOfComp << endl;
+        cout << p1.getId() << " " << p1.getName() << " " << numberOfComp << " comparisons"  << endl;
     }
 }

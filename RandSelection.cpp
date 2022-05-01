@@ -8,10 +8,11 @@ const Person &RandSelection::select(Person A[], int left, int right, int i, int 
     NumComp++;
     int pivot;
     int leftPart;
-    pivot = partition(A,left,right);
+    pivot = partition(A, left, right, NumComp);
     leftPart = pivot - left+1;
-    if (i==leftPart)
+    if (i==leftPart){
         return A[pivot];
+    }
     if(i<leftPart)
         return select(A,left,pivot-1,i,NumComp);
     else
@@ -20,24 +21,25 @@ const Person &RandSelection::select(Person A[], int left, int right, int i, int 
 
 }
 
-int RandSelection::partition(Person *arr, int left, int right) {
+int RandSelection::partition(Person *arr, int left, int right, int &NumComp) {
     int start = left;
     int end = right;
-    //todo: add random to pivotIndex
-//    srand(time(nullptr));
-//    int pivotIndex = left + rand() % (right);
-//    swap(arr[left], arr[pivotIndex]);
+    srand(time(nullptr));
+    int pivotIndex = left + rand() % (right-left+1);
+    swap(arr[left], arr[pivotIndex]);
 
     int pivot = arr[start].getId();
 
     int count = 0;
     for (int i = start + 1; i <= end; i++) {
-        if (arr[i].getId() <= pivot)
+        if (arr[i].getId() <= pivot){
+            NumComp++;
             count++;
+        }
     }
 
     // Giving pivot element its correct position
-    int pivotIndex = start + count;
+    pivotIndex = start + count;
     swap(arr[pivotIndex], arr[start]);
 
     // Sorting left and right parts of the pivot element
@@ -46,13 +48,15 @@ int RandSelection::partition(Person *arr, int left, int right) {
     while (i < pivotIndex && j > pivotIndex) {
 
         while (arr[i].getId() <= pivot) {
+            NumComp++;
             i++;
         }
 
         while (arr[j].getId() > pivot) {
+            NumComp++;
             j--;
         }
-
+        NumComp++;
         if (i < pivotIndex && j > pivotIndex) {
             swap(arr[i++], arr[j--]);
         }

@@ -15,7 +15,7 @@ public:
 
 private:
     const Person & select(Person * personArr, int left, int right, int k, int &NumComp);
-    int partition(Person arr[], int left, int right);
+    int partition(Person *arr, int left, int right, int &NumComp);
 
 };
 
