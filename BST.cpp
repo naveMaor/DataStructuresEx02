@@ -15,11 +15,9 @@ const Person& BST::RunFunc(Person personArr[], int n, int k, int& NumComp)
 		result = new Person((tree->MaxPair()).getPriority(), (tree->MaxPair()).getData());
 	else
 	{
-		//int lcount = LeftSon(tree->getRoot());
 		BSTreeNode* kthNode = kthSmallest(tree->getRoot(), k, NumComp);
 		result= new Person((kthNode->getValue()).getPriority(), (kthNode->getValue()).getData());
 	}
-	//delete (tree);
 	return *result;
 }
 
