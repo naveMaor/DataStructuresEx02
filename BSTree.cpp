@@ -94,7 +94,6 @@ void BSTree::Insert(Pair item, int& NumComp)
 			temp = temp->getRight();
 	}
 	newNode = new BSTreeNode(item, nullptr, nullptr);
-	NumComp = (parent == nullptr) ? NumComp : NumComp + 1;
 	if (parent == nullptr)
 		root = newNode;
 	else if (item.getPriority() < (parent->getValue()).getPriority())

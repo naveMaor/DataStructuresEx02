@@ -1,9 +1,10 @@
 #include "BST.h"
+#include "BSTreeException.h"
 
 const Person& BST::RunFunc(Person personArr[], int n, int k, int& NumComp)
 {
 	Person* result = nullptr;
-	BSTree* tree;
+	BSTree* tree=new BSTree;
 	for (int i = 0; i < n; i++)
 	{
 		tree->Insert(Pair(personArr[i].getName(), personArr[i].getId()), NumComp);
@@ -14,39 +15,44 @@ const Person& BST::RunFunc(Person personArr[], int n, int k, int& NumComp)
 		result = new Person((tree->MaxPair()).getPriority(), (tree->MaxPair()).getData());
 	else
 	{
-		int lcount = LeftSon(tree);
-		BSTreeNode* kthNode = kthSmallest(tree->getRoot(), k, lcount);
+		//int lcount = LeftSon(tree->getRoot());
+		BSTreeNode* kthNode = kthSmallest(tree->getRoot(), k, NumComp);
 		result= new Person((kthNode->getValue()).getPriority(), (kthNode->getValue()).getData());
 	}
+	//delete (tree);
 	return *result;
 }
 
-BSTreeNode* BST::kthSmallest(BSTreeNode* root, int k, int lCount)
+BSTreeNode* BST::kthSmallest(BSTreeNode* root, int k, int& NumComp)
 {
 	// base case
-	//if (root == nullptr) 
-		//return nullptr;
-	int count = lCount + 1;
+	if (root == nullptr) 
+		return nullptr;
+	NumComp++;
+	int count = LeftSon(root) + 1;
 	if (count == k)
-		return root;
+		return root;	
 	if (count > k)
-		return kthSmallest(root->getLeft(), k, lCount-1);
+		return kthSmallest(root->getLeft(), k, NumComp);
 	// else search in right subtree
-	return kthSmallest(root->getRight(), k - count, lCount);
+	return kthSmallest(root->getRight(), k - count, NumComp);
 }
 
-int BST::LeftSon(BSTree* tree)
+int BST::LeftSon(BSTreeNode* root)
 {
-	int count = 0;
-	LeftSonRec(tree->getRoot()->getLeft(), count);
-	return count;
+	return LeftSonRec(root->getLeft());
 }
 
-void BST::LeftSonRec(BSTreeNode* root, int& count)
+int BST::LeftSonRec(BSTreeNode* root)
 {
 	if (root == nullptr)
-		return;
-	count++;
-	LeftSonRec(root->getLeft(), count);
-	LeftSonRec(root->getRight(), count);
+		return 0;
+	else if (root->getLeft() == nullptr && root->getRight() == nullptr)
+		return 1;
+	else if (root->getLeft() == nullptr)
+		return LeftSonRec(root->getRight()) + 1;
+	else if (root->getRight() == nullptr)
+		return LeftSonRec(root->getLeft()) + 1;
+	else
+		return LeftSonRec(root->getLeft()) + LeftSonRec(root->getRight()) + 1;
 }
