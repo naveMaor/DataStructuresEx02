@@ -68,16 +68,12 @@ int RandSelection::partition(Person *arr, int left, int right, int &NumComp) {
 
 
 const Person &RandSelection::RunFunc(Person personArr[], int n, int k, int &NumComp) {
-    //copy the previous array
     Person * data = new Person[n];
     for (int i = 0; i < n; ++i){
         Person person = Person(personArr[i].getId(),personArr[i].getName());
         data[i]= person;
     }
-
     Person* result = new Person(select(data,0,n-1,k,NumComp)) ;
-
-    //delete the pointer
     delete [] data;
     return *result;
 

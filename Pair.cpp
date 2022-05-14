@@ -19,7 +19,7 @@ void Pair::setPriority(int priority) {
     this->priority = data->getWeight();
 }*/
 
-Pair::Pair() {}
+Pair::Pair(){}
 
 Pair::Pair(string data, int priority)
 {
