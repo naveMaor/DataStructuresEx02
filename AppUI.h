@@ -13,6 +13,7 @@
 #include "Func.h"
 #include "RandSelection.h"
 #include "selectHeap.h"
+#include "BST.h"
 
 
 using namespace std;

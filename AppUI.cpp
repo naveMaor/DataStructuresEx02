@@ -57,12 +57,13 @@ void AppUI::Run() {
 
     GetInput();
     //Print();
-    Func* funcs[2];
+    Func* funcs[3];
     funcs[0] = new RandSelection();
     funcs[1] = new selectHeap();
+    funcs[2] = new BST();
     cout << "\n \n result: "<< endl;
     Person p1;
-    for (int i = 0; i < 2; ++i) {
+    for (int i = 0; i < 3; ++i) {
         cout << funcs[i]->GetName() ;
         numberOfComp = 0;
         p1 = funcs[i]->RunFunc(personArr,n,k,numberOfComp);

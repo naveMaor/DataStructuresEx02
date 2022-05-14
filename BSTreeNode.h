@@ -10,6 +10,7 @@ private:
 	Pair value;
 	BSTreeNode* left=nullptr;
 	BSTreeNode* right=nullptr;
+	
 public:
 	BSTreeNode();
 	BSTreeNode(Pair item, BSTreeNode* left, BSTreeNode* right):value(item), left(left), right(right){}
@@ -22,7 +23,5 @@ public:
 	BSTreeNode* getRight() { return right; }
 	void setRight(BSTreeNode* newRight) { right = newRight; }
 	void Inorder();
-	void Preorder();
-	void Postorder();
 
 };

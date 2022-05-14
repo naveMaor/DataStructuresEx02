@@ -1,4 +1,5 @@
 #include "BSTree.h"
+#include "BSTreeException.h"
 
 BSTree::~BSTree()
 {
@@ -75,15 +76,17 @@ BSTreeNode* BSTree::Find(int key, BSTreeNode*& parent, bool& leftChild)
 	return nullptr;
 }
 
-void BSTree::Insert(Pair item)
+void BSTree::Insert(Pair item, int& NumComp)
 {
-	//if (Find(item.getPriority()) != nullptr)
-		//Handle error
 	BSTreeNode* temp = root;
 	BSTreeNode* parent = nullptr;
 	BSTreeNode* newNode;
-
+	bool grabege;
+	if (Find(item.getPriority(), parent, grabege) != nullptr)
+		throw BSTreeException("Invalid input");
+	parent = nullptr;
 	while (temp != nullptr) {
+		NumComp++;
 		parent = temp;
 		if (item.getPriority() < (temp->getValue()).getPriority())
 			temp = temp->getLeft();
@@ -91,6 +94,7 @@ void BSTree::Insert(Pair item)
 			temp = temp->getRight();
 	}
 	newNode = new BSTreeNode(item, nullptr, nullptr);
+	NumComp = (parent == nullptr) ? NumComp : NumComp + 1;
 	if (parent == nullptr)
 		root = newNode;
 	else if (item.getPriority() < (parent->getValue()).getPriority())

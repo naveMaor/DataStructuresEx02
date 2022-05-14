@@ -12,7 +12,7 @@ public:
 	BSTreeNode* getRoot() { return root; }
 	void setRoot(BSTreeNode* newRoot) { root = newRoot; }
 	BSTreeNode* Find(int key, BSTreeNode*& parent, bool& leftChild);
-	void Insert(Pair item);
+	void Insert(Pair item, int& NumComp);
 	void Delete(int key);
 	void DeleteTheNode(BSTreeNode* toDelete, BSTreeNode* parent, bool leftChild);
 	Pair Min();
